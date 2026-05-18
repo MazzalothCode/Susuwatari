@@ -218,8 +218,6 @@
   - 已完成代码层最小实验，等待用户实测
 - 是否成功：
   - 待验证
-- 下一步：
-  - 只验证区域内/区域外 `Drawing` 行为，不扩展其它问题
 
 ### [2026-05-18] 建立长期项目记忆文档
 - 做了什么：
@@ -608,3 +606,40 @@
   - 是
 - 下一步：
   - 后续进入任何新任务前，先读这三份文档，再定义当前唯一目标
+
+### [2026-05-18] Cloudflare Pages 切换为 GitHub 自动部署并保留原域名
+- 做了什么：
+  - 在 GitHub 完成 Cloudflare Pages GitHub App 对 `MazzalothCode/Susuwatari` 的仓库授权
+  - 用户确认后删除原有 `susuwatari` Direct Upload Pages 项目
+  - 以同名 `susuwatari` 重新创建 GitHub 集成的 Pages 项目
+  - 设置生产分支为 `main`
+  - 设置构建命令为 `npm run build`
+  - 设置输出目录为 `dist`
+- 改了哪些文件：
+  - `PROJECT_CONTEXT.md`
+  - `KNOWN_FACTS.md`
+- 结果：
+  - 新项目构建成功
+  - Cloudflare 项目页显示 `Automatic deployments enabled`
+  - Production 来源已切换到 GitHub `main`
+  - `susuwatari.pages.dev` 继续沿用，无需更换地址
+  - 线上访问时浏览器标题确认为 `Assemble! Susuwatari ~集合！ススワタリ～`
+- 是否成功：
+  - 是
+- 验证：
+  - Cloudflare 项目页可见仓库入口 `MazzalothCode/Susuwatari`
+  - 最新生产部署来源为提交 `67bbd84` `Document Cloudflare Pages launch`
+  - 线上域名 `https://susuwatari.pages.dev/` 已恢复可访问
+- 下一步：
+  - 后续只需继续向 GitHub `main` 推送，Cloudflare Pages 应自动构建并发布
+
+### [2026-05-18] 当前工作状态更新（部署链路）
+- 当前正在调查的问题：
+  - 当前无阻塞中的部署问题
+- 当前唯一状态：
+  - GitHub 自动部署链路已接通，后续维护以 `main` 分支推送为唯一发布入口
+- 下一步计划：
+  - 后续如再有 UI / 交互改动，继续沿用 `GitHub main -> Cloudflare Pages` 自动部署链路验证
+- 当前禁止修改的区域：
+  - 不要在无必要情况下删除当前已生效的 Cloudflare Pages `susuwatari` 项目
+  - 不要把部署方式改回 Direct Upload，除非明确需要临时热修复

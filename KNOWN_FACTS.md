@@ -58,8 +58,11 @@
 - 项目已安装 `wrangler` 作为开发依赖，并提供 `npm run deploy:pages` 发布命令。
 - `wrangler.toml` 当前使用 `name = "susuwatari"` 与 `pages_build_output_dir = "dist"`。
 - Cloudflare Pages 项目当前为 `susuwatari`。
-- 项目当前已通过 Pages Direct Upload 成功发布到 `https://susuwatari.pages.dev/`。
-- 本次首次上线未使用 GitHub 自动部署，原因是 Cloudflare Pages GitHub App 对 `Susuwatari` 仓库的授权流程被 GitHub 邮件二次验证阻塞。
+- 项目首次上线曾通过 Pages Direct Upload 成功发布到 `https://susuwatari.pages.dev/`。
+- 为了保留同一个 `susuwatari.pages.dev` 地址并切换到 GitHub 自动部署，原 Direct Upload 项目已被删除并重建。
+- Cloudflare Pages GitHub App 现已获得 `MazzalothCode/Susuwatari` 仓库访问权限。
+- Cloudflare Pages 当前已启用 GitHub 自动部署，生产分支为 `main`。
+- 当前 `susuwatari.pages.dev` 对应的是 GitHub 集成的 Pages 项目，不再是 Direct Upload 项目。
 - 线上页当前可访问，且浏览器标题已确认是 `Assemble! Susuwatari ~集合！ススワタリ～`。
 
 ## 当前已明确不是问题的事项
