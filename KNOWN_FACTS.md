@@ -57,6 +57,10 @@
 - GitHub 远程仓库当前为 `https://github.com/MazzalothCode/Susuwatari.git`。
 - 项目已安装 `wrangler` 作为开发依赖，并提供 `npm run deploy:pages` 发布命令。
 - `wrangler.toml` 当前使用 `name = "susuwatari"` 与 `pages_build_output_dir = "dist"`。
+- Cloudflare Pages 项目当前为 `susuwatari`。
+- 项目当前已通过 Pages Direct Upload 成功发布到 `https://susuwatari.pages.dev/`。
+- 本次首次上线未使用 GitHub 自动部署，原因是 Cloudflare Pages GitHub App 对 `Susuwatari` 仓库的授权流程被 GitHub 邮件二次验证阻塞。
+- 线上页当前可访问，且浏览器标题已确认是 `Assemble! Susuwatari ~集合！ススワタリ～`。
 
 ## 当前已明确不是问题的事项
 

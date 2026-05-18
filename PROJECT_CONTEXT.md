@@ -300,6 +300,24 @@
 - 下一步：
   - 在 Cloudflare Pages 中连接 GitHub 仓库或完成首次部署
 
+### [2026-05-18] Cloudflare Pages 首次上线完成
+- 做了什么：
+  - 在 Cloudflare Pages 中创建项目 `susuwatari`
+  - 因 GitHub App 授权页面被 GitHub 二次验证邮件拦住，未走仓库直连发布
+  - 改为将本地构建产物 `dist` 通过 Pages Direct Upload 完成首次部署
+  - 部署后打开线上地址核验页面可正常访问
+- 改了哪些文件：
+  - `PROJECT_CONTEXT.md`
+  - `KNOWN_FACTS.md`
+- 结果：
+  - 项目已成功上线到 `https://susuwatari.pages.dev/`
+  - 线上页标题已确认为 `Assemble! Susuwatari ~集合！ススワタリ～`
+  - 当前 GitHub 仓库同步已完成，Cloudflare 首次发布也已完成
+- 是否成功：
+  - 是
+- 下一步：
+  - 若后续要改为 GitHub 自动部署，需要先在 GitHub 完成 Cloudflare Pages App 对 `Susuwatari` 仓库的授权
+
 ---
 
 ## 6. 当前工作状态
