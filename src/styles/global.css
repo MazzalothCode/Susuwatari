@@ -282,6 +282,16 @@ button {
   background: transparent !important;
 }
 
+.spirit-canvas--pending {
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(17, 17, 17, 0.92) 0%, rgba(17, 17, 17, 0.92) 58%, transparent 59%),
+    radial-gradient(circle at 38% 42%, #ffffff 0%, #ffffff 11%, transparent 12%),
+    radial-gradient(circle at 62% 42%, #ffffff 0%, #ffffff 11%, transparent 12%),
+    radial-gradient(circle at 38% 42%, rgba(17, 17, 17, 0.95) 0%, rgba(17, 17, 17, 0.95) 4%, transparent 5%),
+    radial-gradient(circle at 62% 42%, rgba(17, 17, 17, 0.95) 0%, rgba(17, 17, 17, 0.95) 4%, transparent 5%);
+}
+
 .spirit-canvas canvas {
   background: transparent !important;
 }
@@ -685,10 +695,6 @@ output {
   width: 100% !important;
   height: 100% !important;
   display: block;
-}
-
-.ui-overlay-shell:not(.is-disabled) .ui-overlay-rive canvas {
-  cursor: pointer;
 }
 
 .ui-stage-shell .stage-canvas {

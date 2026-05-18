@@ -1,5 +1,5 @@
 import { GIFEncoder, applyPalette, quantize } from 'gifenc';
-import { useRive } from '@rive-app/react-webgl2';
+import { useRive, useRiveFile, type RiveFile } from '@rive-app/react-webgl2';
 import {
   memo,
   useCallback,
@@ -149,6 +149,9 @@ export function SpiritFormationStage({
   const [renderIds, setRenderIds] = useState<string[]>([]);
   const [debugSnapshot, setDebugSnapshot] = useState<DebugSnapshot[]>([]);
   const [draftStroke, setDraftStroke] = useState<DraftStroke | null>(null);
+  const { riveFile: spiritRiveFile, status: spiritRiveFileStatus } = useRiveFile({
+    src: littieSpiritUrl
+  });
   const { exportVideo } = useVideoExport(exportCanvas, {
     durationMs: VIDEO_EXPORT_DURATION_MS,
     fps: VIDEO_EXPORT_FPS,
@@ -939,7 +942,9 @@ export function SpiritFormationStage({
               }
             }}
           >
-            <SpiritRive />
+            <SpiritRive
+              riveFile={spiritRiveFileStatus === 'success' ? spiritRiveFile : null}
+            />
           </div>
         ))}
       </div>
@@ -1557,12 +1562,24 @@ function downloadBlob(blob: Blob, filename: string) {
   window.setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-const SpiritRive = memo(function SpiritRive() {
-  const { RiveComponent } = useRive({
-    src: littieSpiritUrl,
-    stateMachines: 'CONTROL',
-    autoplay: true
-  });
+const SpiritRive = memo(function SpiritRive({
+  riveFile
+}: {
+  riveFile: RiveFile | null;
+}) {
+  const { RiveComponent } = useRive(
+    riveFile
+      ? {
+          riveFile,
+          stateMachines: 'CONTROL',
+          autoplay: true
+        }
+      : null
+  );
+
+  if (!riveFile) {
+    return <div className="spirit-canvas spirit-canvas--pending" />;
+  }
 
   return <RiveComponent className="spirit-canvas" />;
 });

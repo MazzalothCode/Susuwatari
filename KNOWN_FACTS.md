@@ -48,7 +48,8 @@
 - 当前中央绘制区是居中的正方形区域。
 - 进入 `drawMode` 时，绘制区会显示 `1px` 灰色虚线边框；退出或绘制完成后边框消失。
 - 页面浏览器标题当前应为 `Assemble! Susuwatari ~集合！ススワタリ～`。
-- 非 draw mode 下，Rive 页面 UI 画布会显示手型指针；进入 draw mode 后仍由 Brush 链路接管并隐藏系统光标，不与“笔”模式冲突。
+- 非 draw mode 下，手型指针不应再作用于整张 Rive 页面画布，而是由 overlay 热点区域判定；进入 draw mode 后仍由 Brush 链路接管并隐藏系统光标，不与“笔”模式冲突。
+- `LittleSpiritUiOverlay.tsx` 当前不再通过 CSS 给整张 `.ui-overlay-rive canvas` 直接写 `cursor: pointer`。
 
 ## 仓库 / 发布基础
 
@@ -64,6 +65,11 @@
 - Cloudflare Pages 当前已启用 GitHub 自动部署，生产分支为 `main`。
 - 当前 `susuwatari.pages.dev` 对应的是 GitHub 集成的 Pages 项目，不再是 Direct Upload 项目。
 - 线上页当前可访问，且浏览器标题已确认是 `Assemble! Susuwatari ~集合！ススワタリ～`。
+
+## 小精灵资源加载相关
+
+- `SpiritFormationStage.tsx` 当前会先在 stage 级别调用 `useRiveFile({ src: littieSpiritUrl })` 共享加载小精灵 `.riv` 文件。
+- 单个 `SpiritRive` 当前不再各自使用 `src: littieSpiritUrl` 直接加载文件，而是接收共享的 `riveFile`。
 
 ## 当前已明确不是问题的事项
 

@@ -643,3 +643,30 @@
 - 当前禁止修改的区域：
   - 不要在无必要情况下删除当前已生效的 Cloudflare Pages `susuwatari` 项目
   - 不要把部署方式改回 Direct Upload，除非明确需要临时热修复
+
+### [2026-05-18] 修正手型指针热点范围并排查生产环境精灵初始化过慢
+- 做了什么：
+  - 复核了“整页手型指针”实现，确认问题来自给整张 `Page` Rive canvas 直接写了 `cursor: pointer`
+  - 将普通模式下的指针逻辑改成按 overlay 内的热点区域判定，而不是整页一律显示手型
+  - 复核了小精灵生成链路，确认锚点/路径计算本身没有慢到几十秒的问题
+  - 定位到真正可疑点：每个 `.spirit-instance` 之前都会各自 `useRive({ src: littieSpiritUrl })`，导致同一个小精灵 `.riv` 文件在大量实例下重复加载/重复初始化
+  - 改为在 `SpiritFormationStage` 级别使用 `useRiveFile({ src: littieSpiritUrl })` 共享加载一次 Rive 文件，再把共享 `riveFile` 传给每个 `SpiritRive`
+  - 在共享资源尚未 ready 时增加极轻量占位，避免节点尺寸塌陷
+- 改了哪些文件：
+  - `src/components/LittleSpiritUiOverlay.tsx`
+  - `src/components/SpiritFormationStage.tsx`
+  - `src/styles/global.css`
+- 为什么改：
+  - 解决“stage 区域外整片都是手型指针”的误判
+  - 优先切掉生产环境下最可疑的重复资源初始化成本，而不是误改锚点/运动逻辑
+- 结果：
+  - 生产构建已通过
+  - 指针逻辑已从“整页 canvas 手型”收敛为“热点区域手型”
+  - 小精灵资源路径已从“每实例独立 src 加载”改为“stage 级共享 riveFile”
+- 是否成功：
+  - 代码修复完成，等待线上实测验证体感
+- 下一步：
+  - 推送到 `main`
+  - 等 Cloudflare 自动部署完成后复测：
+    - stage 外空白区不应再显示手型
+    - 选字后不应再出现“锚点先到，小精灵几十秒才慢慢出现”的现象

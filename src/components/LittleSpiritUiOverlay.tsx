@@ -35,6 +35,12 @@ const DENSITY_RANGE = { min: 30, max: 90 };
 const SPEED_RANGE = { min: 0.4, max: 1.6 };
 const SIZE_RANGE = { min: 0.15, max: 0.45 };
 const EPSILON = 0.0001;
+const POINTER_HOTSPOTS = [
+  { left: 0.09, right: 0.42, top: 0.8, bottom: 0.93 },
+  { left: 0.52, right: 0.74, top: 0.8, bottom: 0.92 },
+  { left: 0.74, right: 0.93, top: 0.74, bottom: 0.95 },
+  { left: 0.94, right: 0.995, top: 0.045, bottom: 0.13 }
+] as const;
 
 function LittleSpiritUiOverlayInner({
   glyph,
@@ -457,6 +463,45 @@ function LittleSpiritUiOverlayInner({
     };
   }, [brushXBinding, brushYBinding, drawMode]);
 
+  useEffect(() => {
+    const overlay = overlayRef.current;
+    if (!overlay || drawMode) {
+      if (overlay) {
+        overlay.style.cursor = '';
+      }
+      return;
+    }
+
+    const updateCursor = (clientX: number, clientY: number) => {
+      const bounds = overlay.getBoundingClientRect();
+      if (bounds.width < 1 || bounds.height < 1) {
+        overlay.style.cursor = '';
+        return;
+      }
+
+      const x = clamp((clientX - bounds.left) / bounds.width, 0, 1);
+      const y = clamp((clientY - bounds.top) / bounds.height, 0, 1);
+      overlay.style.cursor = isPointInPointerHotspot(x, y) ? 'pointer' : '';
+    };
+
+    const handlePointerMove = (event: PointerEvent) => {
+      updateCursor(event.clientX, event.clientY);
+    };
+
+    const handlePointerLeave = () => {
+      overlay.style.cursor = '';
+    };
+
+    overlay.addEventListener('pointermove', handlePointerMove);
+    overlay.addEventListener('pointerleave', handlePointerLeave);
+
+    return () => {
+      overlay.style.cursor = '';
+      overlay.removeEventListener('pointermove', handlePointerMove);
+      overlay.removeEventListener('pointerleave', handlePointerLeave);
+    };
+  }, [drawMode]);
+
   useLayoutEffect(() => {
     if (!didHydrateRef.current) {
       return;
@@ -548,4 +593,14 @@ function decodeSelectedKey(value: number) {
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
+}
+
+function isPointInPointerHotspot(x: number, y: number) {
+  return POINTER_HOTSPOTS.some(
+    (hotspot) =>
+      x >= hotspot.left &&
+      x <= hotspot.right &&
+      y >= hotspot.top &&
+      y <= hotspot.bottom
+  );
 }
