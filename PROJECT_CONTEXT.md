@@ -670,3 +670,22 @@
   - 等 Cloudflare 自动部署完成后复测：
     - stage 外空白区不应再显示手型
     - 选字后不应再出现“锚点先到，小精灵几十秒才慢慢出现”的现象
+
+### [2026-05-18] 最后收尾：接入 favicon 并全页禁用右键
+- 做了什么：
+  - 将仓库根目录的 `favicon.svg` 接入 `index.html`
+  - 在 `src/main.tsx` 中对全局 `contextmenu` 事件执行 `preventDefault()`，禁用整页右键菜单
+- 改了哪些文件：
+  - `index.html`
+  - `src/main.tsx`
+  - `favicon.svg`
+- 为什么改：
+  - 满足网页 favicon 设置需求
+  - 满足全页禁用右键的交互要求
+- 结果：
+  - 生产构建通过
+  - 打包产物中已包含 `favicon.svg`
+- 是否成功：
+  - 是
+- 下一步：
+  - 提交并推送，让 Cloudflare 自动部署这一轮最终收尾

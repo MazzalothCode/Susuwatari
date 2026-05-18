@@ -53,6 +53,7 @@
 
 ## 仓库 / 发布基础
 
+- 仓库根目录当前存在 `favicon.svg`，并已作为网页 favicon 接入 `index.html`。
 - 当前目录已经初始化为本地 Git 仓库，默认分支为 `main`。
 - `.gitignore` 当前会忽略 `dist`、`node_modules`、`.DS_Store`、`*.tsbuildinfo` 与 `.wrangler`。
 - GitHub 远程仓库当前为 `https://github.com/MazzalothCode/Susuwatari.git`。
@@ -65,6 +66,10 @@
 - Cloudflare Pages 当前已启用 GitHub 自动部署，生产分支为 `main`。
 - 当前 `susuwatari.pages.dev` 对应的是 GitHub 集成的 Pages 项目，不再是 Direct Upload 项目。
 - 线上页当前可访问，且浏览器标题已确认是 `Assemble! Susuwatari ~集合！ススワタリ～`。
+
+## 页面交互限制
+
+- `src/main.tsx` 当前会全局拦截 `contextmenu` 事件，因此整页右键菜单被禁用。
 
 ## 小精灵资源加载相关
 
