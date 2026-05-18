@@ -1,5 +1,7 @@
 # Assemble! Susuwatari
 
+![Assemble! Susuwatari demo](src/images/demo.png)
+
 ## English
 
 ### Overview
