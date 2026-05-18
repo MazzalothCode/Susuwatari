@@ -275,6 +275,31 @@
   - 生成首次提交
   - 继续确认远程 Git 与 Cloudflare 发布方式
 
+### [2026-05-18] GitHub 建仓与发布工具接线
+- 做了什么：
+  - 在 GitHub 中创建远程仓库 `MazzalothCode/Susuwatari`
+  - 将本地仓库连接到 `origin`
+  - 初次 `git push` 因 `POST git-receive-pack (chunked)` 失败，随后用 `git -c http.version=HTTP/1.1 -c http.postBuffer=524288000 push -u origin main --verbose` 成功推送
+  - 安装 `wrangler` 为开发依赖
+  - 新增 `wrangler.toml`，写入 Pages 项目基础配置
+  - 在 `package.json` 中新增 `deploy:pages` 脚本
+- 改了哪些文件：
+  - `package.json`
+  - `package-lock.json`
+  - `wrangler.toml`
+  - `PROJECT_CONTEXT.md`
+  - `KNOWN_FACTS.md`
+- 为什么改：
+  - 满足“同步至 Git 仓库”目标
+  - 为 Cloudflare Pages 持续发布准备最小可复用配置
+- 结果：
+  - GitHub 远程仓库已创建且首个提交已成功推送
+  - Cloudflare 账户浏览器登录态已确认可用
+- 是否成功：
+  - 部分成功（GitHub 完成，Cloudflare 正在进行）
+- 下一步：
+  - 在 Cloudflare Pages 中连接 GitHub 仓库或完成首次部署
+
 ---
 
 ## 6. 当前工作状态
@@ -291,7 +316,7 @@
 ### 下一步计划
 - 构建确认标题与样式修改没有破坏现有页面
 - 完成本地首次提交
-- 在具备 Cloudflare 凭据与远程仓库目标后完成同步与发布
+- 完成 Cloudflare Pages 首次上线
 
 ### 当前禁止修改的区域
 - 不重启 BrushDebug / 独立 Brush artboard 调试路线

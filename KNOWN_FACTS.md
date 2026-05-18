@@ -54,6 +54,9 @@
 
 - 当前目录已经初始化为本地 Git 仓库，默认分支为 `main`。
 - `.gitignore` 当前会忽略 `dist`、`node_modules`、`.DS_Store`、`*.tsbuildinfo` 与 `.wrangler`。
+- GitHub 远程仓库当前为 `https://github.com/MazzalothCode/Susuwatari.git`。
+- 项目已安装 `wrangler` 作为开发依赖，并提供 `npm run deploy:pages` 发布命令。
+- `wrangler.toml` 当前使用 `name = "susuwatari"` 与 `pages_build_output_dir = "dist"`。
 
 ## 当前已明确不是问题的事项
 
