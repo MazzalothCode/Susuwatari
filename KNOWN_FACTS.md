@@ -3,6 +3,7 @@
 ## 项目基础
 
 - 项目是一个交互式网页：用户输入单个字母/数字，或手绘单笔路径，由多个 Rive 小精灵在区域内游走并组成图形。
+- 项目中文名当前语境为 `集合！灰尘精灵`。
 - 技术栈包含：`Vite`、`React`、`TypeScript`、`Rive`。
 - 项目当前 Git 名称语境为 `Susuwatari`。
 - 当前整页 UI 使用 `little_spirit_ui.riv` 的 `Page` artboard。
@@ -66,10 +67,16 @@
 - Cloudflare Pages 当前已启用 GitHub 自动部署，生产分支为 `main`。
 - 当前 `susuwatari.pages.dev` 对应的是 GitHub 集成的 Pages 项目，不再是 Direct Upload 项目。
 - 线上页当前可访问，且浏览器标题已确认是 `Assemble! Susuwatari ~集合！ススワタリ～`。
+- 当前项目主体实现已完成，状态已进入文档审阅 / 维护阶段。
 
 ## 页面交互限制
 
 - `src/main.tsx` 当前会全局拦截 `contextmenu` 事件，因此整页右键菜单被禁用。
+
+## 文档状态
+
+- `README.md` 当前已改为英文全文 / 中文全文 / 日文全文的分段结构。
+- `README.md` 的英文与日文部分当前已按用户修订后的中文内容同步更新。
 
 ## 小精灵资源加载相关
 
